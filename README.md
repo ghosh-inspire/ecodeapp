@@ -12,13 +12,12 @@ $ make
 ```
 ## Example Test Commands
 ```
-$ ./ecodecpu1 /cpu1-tests/cpu1-cb-write --single
-$ ./ecodecpu1 /cpu1-tests/cpu1-cb-write --param cpu1-cb-write-params 55
+$ ./ecodecpu1 /cpu1-tests/cpu1-cb-write-only --single
+$ ./ecodecpu1 /cpu1-tests/cpu1-cb-write-only --param cpu1-cb-write-params 55
 $ ./ecodecpu1 /cpu1-tests/cpu1-cb-show-only
 
-$ ./ecodecpu2 /cpu2-tests/cpu2-cb-read --single
+$ ./ecodecpu2 /cpu2-tests/cpu2-cb-read-only --single
 $ ./ecodecpu2 /cpu2-tests/cpu2-cb-show-only
-$ ./ecodecpu1 /cpu1-tests/cpu1-cb-show-only
 ```
 
 ## Randomised Test Commands

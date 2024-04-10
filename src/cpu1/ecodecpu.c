@@ -11,8 +11,6 @@
 
 #if !defined(NO_HARDWARE_BUILD)
 static unsigned char __attribute__((section(".cpu1_data"))) __attribute__((used)) cb_cpu1_data[(ECODE_SHM_SIZE_BYTES / ECODE_CPU1_MAU)];
-#else
-static unsigned char __attribute__((section(".cpu1_data"))) __attribute__((used)) cb_cpu1_data[ECODE_SHM_SIZE_BYTES];
 #endif
 
 static cb_t cb_cpu1;
@@ -43,11 +41,11 @@ MunitResult cpu1_cb_write_ofst_test(const MunitParameter params[], void* user_da
 	munit_assert_int(ECODE_GET_READ_OFFSET(cb), >=, 0);
 	munit_assert_int(ECODE_GET_WRITE_OFFSET(cb), >=, 0);
 
-	usleep(10 * 1000);
+	usleep(50 * 1000);
 	return MUNIT_OK;
 }
 
-MunitResult cpu1_cb_write(const MunitParameter params[], void* user_data) {
+MunitResult cpu1_cb_write_only(const MunitParameter params[], void* user_data) {
 
 	cb_t *cb = (cb_t *)user_data;
 	const char *cpu1_param = munit_parameters_get(params, "cpu1-cb-write-params");
@@ -121,8 +119,8 @@ static void cpu1_teardown(void* user_data) {
 
 MunitTest cpu1_tests[] = {
 	{
-		"/cpu1-cb-write", /* name */
-		cpu1_cb_write, /* test */
+		"/cpu1-cb-write-only", /* name */
+		cpu1_cb_write_only, /* test */
 		cpu1_setup, /* setup */
 		cpu1_teardown, /* tear_down */
 		MUNIT_TEST_OPTION_NONE, /* options */

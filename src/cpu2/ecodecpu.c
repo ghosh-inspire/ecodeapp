@@ -11,8 +11,6 @@
 
 #if !defined(NO_HARDWARE_BUILD)
 static unsigned char __attribute__((section(".cpu2_data"))) __attribute__((used)) cb_cpu2_data[(ECODE_SHM_SIZE_BYTES / ECODE_CPU2_MAU)];
-#else
-static unsigned char __attribute__((section(".cpu2_data"))) __attribute__((used)) cb_cpu2_data[ECODE_SHM_SIZE_BYTES];
 #endif
 
 static cb_t cb_cpu2;
@@ -37,11 +35,11 @@ MunitResult cpu2_cb_read_ofst_test(const MunitParameter params[], void* user_dat
 	munit_assert_int(ECODE_GET_READ_OFFSET(cb), >=, 0);
 	munit_assert_int(ECODE_GET_WRITE_OFFSET(cb), >=, 0);
 
-	usleep(10 * 1000);
+	usleep(50 * 1000);
 	return MUNIT_OK;
 }
 
-MunitResult cpu2_cb_read(const MunitParameter params[], void* user_data) {
+MunitResult cpu2_cb_read_only(const MunitParameter params[], void* user_data) {
 
 	cb_t *cb = (cb_t *)user_data;
 	unsigned char data = 0;
@@ -119,8 +117,8 @@ static void cpu2_teardown(void* user_data) {
 
 MunitTest cpu2_tests[] = {
 	{
-		"/cpu2-cb-read", /* name */
-		cpu2_cb_read, /* test */
+		"/cpu2-cb-read-only", /* name */
+		cpu2_cb_read_only, /* test */
 		cpu2_setup, /* setup */
 		cpu2_teardown, /* tear_down */
 		MUNIT_TEST_OPTION_NONE, /* options */
