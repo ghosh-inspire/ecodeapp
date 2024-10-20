@@ -1,6 +1,6 @@
 # ECODE APP
 
-##Overview
+## Overview
 This project implements a circular buffer mechanism for two CPUs to communicate with each other.
 - The shared memory is 512b and both CPUs can read while only one can write.
 - The project uses mUnit for unit testing.
